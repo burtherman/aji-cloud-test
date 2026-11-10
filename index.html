@@ -54,6 +54,16 @@
     }
     .clips { list-style: none; margin: 0; padding: 0; }
     .empty { color: var(--muted); font-style: italic; }
+    .fr-list { list-style: none; margin: 0; padding: 0; }
+    .fr-list li { margin: 0 0 16px; }
+    .fr-list a { color: var(--text); }
+    .fr-list a:hover { color: var(--accent); }
+    .fr-date {
+      display: block;
+      color: var(--muted);
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+    }
     footer {
       padding: 32px 0 48px;
       color: var(--muted);
@@ -70,6 +80,7 @@
       <nav>
         <a href="#about">About</a>
         <a href="#clips">Clips</a>
+        <a href="#federal-register">Federal Register</a>
       </nav>
     </header>
 
@@ -89,6 +100,12 @@
         </ul>
         <p class="empty" id="clips-empty">Clips coming soon.</p>
       </section>
+
+      <section id="federal-register">
+        <h2>Latest from the Federal Register</h2>
+        <ul class="fr-list" id="fr-list"></ul>
+        <p class="empty" id="fr-status">Loading the newest documents…</p>
+      </section>
     </main>
 
     <footer>
@@ -102,6 +119,51 @@
     if (document.querySelectorAll('#clip-list li').length > 0) {
       document.getElementById('clips-empty').hidden = true;
     }
+
+    // Latest from the Federal Register: fetched in the reader's browser on page load.
+    (function () {
+      var list = document.getElementById('fr-list');
+      var status = document.getElementById('fr-status');
+      var url = 'https://www.federalregister.gov/api/v1/documents.json' +
+        '?per_page=5&order=newest' +
+        '&fields[]=title&fields[]=publication_date&fields[]=html_url';
+
+      function formatDate(iso) {
+        var d = new Date(iso + 'T12:00:00');
+        if (isNaN(d)) return iso;
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      fetch(url)
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          var docs = (data && data.results) || [];
+          if (docs.length === 0) {
+            status.textContent = 'No documents found.';
+            return;
+          }
+          docs.slice(0, 5).forEach(function (doc) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = doc.html_url;
+            a.textContent = doc.title;
+            var date = document.createElement('span');
+            date.className = 'fr-date';
+            date.textContent = formatDate(doc.publication_date);
+            li.appendChild(a);
+            li.appendChild(date);
+            list.appendChild(li);
+          });
+          status.hidden = true;
+        })
+        .catch(function () {
+          status.innerHTML = 'Couldn\u2019t load the Federal Register right now. ' +
+            '<a href="https://www.federalregister.gov/documents/search?order=newest">See the newest documents on federalregister.gov</a>.';
+        });
+    })();
   </script>
 </body>
 </html>
