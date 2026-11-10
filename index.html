@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Reporter</title>
+  <meta name="description" content="Test Reporter, journalist.">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --text: #1d1d1b;
+      --muted: #5e5e58;
+      --accent: #a8322d;
+      --rule: #dcd9d0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161614;
+        --text: #ecebe6;
+        --muted: #a3a29b;
+        --accent: #e0726b;
+        --rule: #34332f;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 18px/1.6 Georgia, "Times New Roman", serif;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+    header { padding: 64px 0 32px; border-bottom: 1px solid var(--rule); }
+    h1 { font-size: 2.6rem; line-height: 1.1; margin: 0 0 8px; }
+    .tagline {
+      margin: 0;
+      color: var(--muted);
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    nav { margin-top: 20px; font-family: system-ui, -apple-system, sans-serif; font-size: 0.95rem; }
+    nav a { color: var(--accent); text-decoration: none; margin-right: 18px; }
+    nav a:hover { text-decoration: underline; }
+    section { padding: 40px 0; border-bottom: 1px solid var(--rule); }
+    h2 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 16px;
+    }
+    .clips { list-style: none; margin: 0; padding: 0; }
+    .empty { color: var(--muted); font-style: italic; }
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Test Reporter</h1>
+      <p class="tagline">Journalist</p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#clips">Clips</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <p>Test Reporter is a journalist covering government, public money and the people affected by both. Their reporting draws on public records, data and on-the-ground interviews.</p>
+        <p>Tips and story ideas are always welcome.</p>
+      </section>
+
+      <section id="clips">
+        <h2>Clips</h2>
+        <ul class="clips" id="clip-list">
+          <!-- CLIPS GO HERE: add one <li> per published story, e.g.
+               <li><a href="URL">Headline</a> — Outlet, Month Year</li> -->
+        </ul>
+        <p class="empty" id="clips-empty">Clips coming soon.</p>
+      </section>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Test Reporter
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Hide the placeholder once any clips have been added to the list.
+    if (document.querySelectorAll('#clip-list li').length > 0) {
+      document.getElementById('clips-empty').hidden = true;
+    }
+  </script>
+</body>
+</html>
