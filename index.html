@@ -52,6 +52,20 @@
       color: var(--accent);
       margin: 0 0 16px;
     }
+    .about-body { display: flex; gap: 28px; align-items: flex-start; }
+    .about-body p:first-child { margin-top: 0; }
+    .headshot {
+      flex: 0 0 180px;
+      width: 180px;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    @media (max-width: 560px) {
+      .about-body { flex-direction: column; gap: 20px; }
+      .headshot { flex-basis: auto; width: 160px; }
+    }
     .clips { list-style: none; margin: 0; padding: 0; }
     .empty { color: var(--muted); font-style: italic; }
     .fr-list { list-style: none; margin: 0; padding: 0; }
@@ -87,8 +101,13 @@
     <main>
       <section id="about">
         <h2>About</h2>
-        <p>Test Reporter is a journalist covering government, public money and the people affected by both. Their reporting draws on public records, data and on-the-ground interviews.</p>
-        <p>Tips and story ideas are always welcome.</p>
+        <div class="about-body">
+          <img class="headshot" src="images/headshot.jpg" alt="Headshot of Test Reporter" width="480" height="600">
+          <div>
+            <p>Test Reporter is a journalist covering government, public money and the people affected by both. Their reporting draws on public records, data and on-the-ground interviews.</p>
+            <p>Tips and story ideas are always welcome.</p>
+          </div>
+        </div>
       </section>
 
       <section id="clips">
