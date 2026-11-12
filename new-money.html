@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Money at USDA</title>
+  <meta name="description" content="USDA contracts awarded Oct. 13 to Nov. 12, 2026, to companies with no USDA contract in the prior five years, from USAspending.gov.">
+  <style>
+    :root {
+      --bg: #fbfaf7; --text: #1d1d1b; --muted: #5e5e58; --accent: #a8322d; --rule: #dcd9d0;
+      --flag-bg: #fbefd9; --flag-text: #6b4a0b; --ok: #2f6b3a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161614; --text: #ecebe6; --muted: #a3a29b; --accent: #e0726b; --rule: #34332f;
+        --flag-bg: #3a2f1a; --flag-text: #f0d29a; --ok: #8fcf9a;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 18px/1.6 Georgia, "Times New Roman", serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    header { padding: 48px 0 28px; border-bottom: 1px solid var(--rule); }
+    .back { font: 0.9rem system-ui, -apple-system, sans-serif; color: var(--accent); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 2.4rem; line-height: 1.1; margin: 16px 0 10px; }
+    .dek { margin: 0; color: var(--muted); font-size: 1.1rem; }
+    section { padding: 32px 0; border-bottom: 1px solid var(--rule); }
+    h2 { font: 600 0.85rem system-ui, -apple-system, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 20px; }
+    .stat { border-top: 3px solid var(--accent); padding-top: 8px; }
+    .stat b { display: block; font-size: 1.9rem; line-height: 1.1; }
+    .stat span { display: block; font: 0.85rem/1.35 system-ui, -apple-system, sans-serif; color: var(--muted); }
+    @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+    .ok { font: 0.9rem system-ui, -apple-system, sans-serif; color: var(--ok); }
+    .alert { background: var(--flag-bg); color: var(--flag-text); padding: 12px 14px; border-radius: 4px; }
+    ul.caveats li { margin-bottom: 10px; }
+    .awards { list-style: none; margin: 0; padding: 0; }
+    .award { padding: 22px 0; border-bottom: 1px solid var(--rule); }
+    .award:last-child { border-bottom: 0; }
+    .award-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .rank { font: 0.85rem system-ui, -apple-system, sans-serif; color: var(--muted); min-width: 1.6em; }
+    .award h3 { font-size: 1.15rem; margin: 0; flex: 1 1 260px; }
+    .amt { font: 700 1.15rem system-ui, -apple-system, sans-serif; font-variant-numeric: tabular-nums; }
+    .desc { margin: 6px 0 10px; font-size: 0.95rem; overflow-wrap: anywhere; }
+    dl { margin: 0; font: 0.88rem/1.45 system-ui, -apple-system, sans-serif; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+    @media (max-width: 560px) { dl { grid-template-columns: 1fr; } }
+    dt { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    a { color: var(--accent); }
+    .flag { margin: 12px 0 0; background: var(--flag-bg); color: var(--flag-text); padding: 10px 12px; border-radius: 4px; font: 0.88rem/1.45 system-ui, -apple-system, sans-serif; }
+    .flag a { color: inherit; }
+    footer { padding: 28px 0 48px; color: var(--muted); font: 0.85rem system-ui, -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="back" href="index.html">← Home</a>
+      <h1>New money at USDA</h1>
+      <p class="dek">Contracts the Department of Agriculture awarded from Oct. 13 through Nov. 12, 2026, to companies with no USDA contract record in the five years before. Biggest first.</p>
+    </header>
+
+    <main>
+      <section id="summary">
+        <h2>What I found</h2>
+        <div class="stats">
+          <div class="stat"><b>302</b><span>new USDA contracts awarded in the 30 days, to 257 companies. All were checked.</span></div>
+          <div class="stat"><b>33</b><span>went to companies with no USDA contract under the same registration ID in the prior five years</span></div>
+          <div class="stat"><b>$15,350,662</b><span>obligated so far on those 33 contracts</span></div>
+        </div>
+        <p>2 of the 33 are flagged below as probably not new: another company with the exact same name got USDA contracts in the prior five years. That leaves 31 with no match by either registration ID or exact name.</p>
+        <p class="ok">Every lookup completed. All 257 companies’ histories were checked, and no request to USAspending.gov failed.</p>
+      </section>
+
+      <section id="method">
+        <h2>How I decided a company was new</h2>
+        <p>Every company that wins a federal contract registers with the government and gets a 12-character ID called a Unique Entity ID. I used that ID as the company’s identity.</p>
+        <p>First, I asked USAspending.gov for every contract USDA newly awarded between Oct. 13 and Nov. 12, 2026. That means the first action on the contract was in that window, not a change to an older contract. It includes purchase orders, definitive contracts and orders placed under existing contract vehicles.</p>
+        <p>Then, for each company’s ID, I searched for any USDA contract (including umbrella contracts that agencies order from) with any recorded activity from Oct. 13, 2021, through Oct. 12, 2026. If that search came back empty, I counted the company as new to USDA.</p>
+        <p>Finally, as a check, I searched those companies’ names to see whether a company with the same name but a different ID had USDA contracts in the same five years. Those are flagged below.</p>
+
+        <h2 style="margin-top:28px">What this method could get wrong</h2>
+        <ul class="caveats">
+          <li><strong>One company can have more than one ID.</strong> Big firms often register divisions, branches or subsidiaries separately. That is why US Foods and Phoenix Software International show up here even though companies with their exact names have USDA contracts under other IDs. I flagged exact name matches, but a related company with a different name (a parent, a subsidiary or a renamed firm) would not be caught.</li>
+          <li><strong>Joint ventures get their own IDs.</strong> A joint venture can be brand new on paper while its partners are longtime USDA contractors, as with Kenall-Halff JV below.</li>
+          <li><strong>Only prime contracts count.</strong> A company could have worked for USDA as a subcontractor, or received USDA grants, loans or farm payments, and still appear new here.</li>
+          <li><strong>Small purchases are often missing.</strong> Many government credit card buys and other small purchases are not reported to USAspending.gov, so a company with only small past sales to USDA may look new.</li>
+          <li><strong>The data is still coming in.</strong> Agencies report contracts after the fact, so contracts from the last few days may be missing, and dollar amounts can change as contracts are modified. The amount shown is what USDA had obligated as of when I pulled the data, not the contract’s maximum possible value.</li>
+          <li><strong>Agency labels come from USAspending.gov.</strong> Some USDA offices that buy on behalf of others are labeled “Office of the Chief Financial Officer.” The specific buying office is shown next to it.</li>
+          <li><strong>The data can have errors.</strong> Misreported IDs, names or dates in the government’s records would carry through to this list. Check each contract’s page before relying on it.</li>
+        </ul>
+      </section>
+
+      <section id="contracts">
+        <h2>The 33 contracts</h2>
+        <ol class="awards">
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">1</span>
+            <h3>BRANTLEY CONSTRUCTION SERVICES, LLC</h3>
+            <span class="amt">$7,918,965</span>
+          </div>
+          <p class="desc">GAOA BUCK HALL RECREATION PHASE 1 RENOVATION</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 6, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 12</dd></div>
+            <div><dt>Type</dt><dd>Definitive contract</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12445227C0001_12C2_-NONE-_-NONE-">12445227C0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">2</span>
+            <h3>GENTRY CONTROLS &amp; CONSULTING LLC</h3>
+            <span class="amt">$3,295,000</span>
+          </div>
+          <p class="desc">MICRO GIN UPGRADE</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 3, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27P0007_1205_-NONE-_-NONE-">124PSA27P0007 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">3</span>
+            <h3>VERYON</h3>
+            <span class="amt">$903,240</span>
+          </div>
+          <p class="desc">COMPUTER MAINTENANCE MANAGEMENT SYSTEM (CMMS) (COTS)</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 15, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA FOREST SERVICE</dd></div>
+            <div><dt>Type</dt><dd>Definitive contract</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12760427C0001_12C2_-NONE-_-NONE-">12760427C0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">4</span>
+            <h3>ALPHA-ECHO LLC</h3>
+            <span class="amt">$738,393</span>
+          </div>
+          <p class="desc">GAOA, HIGH SIERRA RANGER STATION UPGRADES, SIERRA NATIONAL FOREST.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 9, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA NORTHWEST 6</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240BH27P0003_12C2_-NONE-_-NONE-">1240BH27P0003 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">5</span>
+            <h3>KWR CONSTRUCTION INC</h3>
+            <span class="amt">$326,810</span>
+          </div>
+          <p class="desc">GAOA WEAVER&#x27;S NEEDLE VISTA AND CANYON LAKE VISTA PAVEMENT PROJECT TONTO NF</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 29, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA SOUTHWEST 7</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_127EAX27F0001_12C2_140F0822D0068_1448">127EAX27F0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">6</span>
+            <h3>S&amp;K APPLIED SOLUTIONS, LLC</h3>
+            <span class="amt">$253,752</span>
+          </div>
+          <p class="desc">TECHNICAL SERVICES NEEDED TO EVALUATE WILDLAND FIRE CHEMICALS.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 3, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA NORTHWEST 3</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240BE27F0009_12C2_47QRCA25DS727_4732">1240BE27F0009 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">7</span>
+            <h3>MCALLEN FOREIGN TRADE ZONE, INC.</h3>
+            <span class="amt">$246,474</span>
+          </div>
+          <p class="desc">THE PROCUREMENT OF TEMPORARY WAREHOUSE AND OFFICE SERVICES NECESSARY TO STAGE SUPPLIES AND EQUIPMENT IN SUPPORT OF THE USDA ANIMAL PLANT HEALTH INSPECTION SERVICES (APHIS) NWS ERADICATION AND CONTROL PROGRAM OF THE NEW WORLD SCREWWORM (NWS) INSECTS.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 3, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Definitive contract</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27C0004_1205_-NONE-_-NONE-">124PSA27C0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">8</span>
+            <h3>RIPPLE EFFECT COMMUNICATIONS, INC.</h3>
+            <span class="amt">$238,058</span>
+          </div>
+          <p class="desc">THIS IS A FIRM FIXED-PRICE TASK ORDER FOR NON-PERSONAL PROFESSIONAL SUPPORT SERVICES TO PROVIDE PUBLIC COMMENT PROCESSING, ANALYSIS, AND REPORTING AS WELL AS REGULATORY WRITING IN SUPPORT OF THE U.S. DEPARTMENT OF AGRICULTURE (USDA) AGRICULTURAL MARK</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 2, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27F0018_1205_47QRAA22D008N_4732">124PSA27F0018 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">9</span>
+            <h3>ENVIROCHECK, INC</h3>
+            <span class="amt">$207,000</span>
+          </div>
+          <p class="desc">EMERGENCY PURCHASE FOR ENVIRONMENTAL TESTING SERVICES IN B1 TO CONTINUE DAILY OPERATIONS AT FSIS EASTERN LABORATORY AND USNPRC B1, 950 COLLEGE STATION RD ATHENS GA</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 29, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27P0005_1205_-NONE-_-NONE-">124PSA27P0005 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">10</span>
+            <h3>ALGENTA TECHNOLOGIES LLC</h3>
+            <span class="amt">$183,509</span>
+          </div>
+          <p class="desc">U.S. DEPARTMENT OF AGRICULTURE, RESEARCH, EDUCATION, AND ECONOMICS (REE) AND NATIONAL AGRICULTURAL STATISTICS SERVICE (NASS): RENEWAL OF BLAISE 4 &amp; 5 (COMPUTER-ASSISTED INTERVIEWING (CAI) SOFTWARE LICENSES).</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 3, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP, INFORMATION TECHNOLOGY DIV</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_128PTA27P0002_1205_-NONE-_-NONE-">128PTA27P0002 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">11</span>
+            <h3>EMPIRE PUMP CORP</h3>
+            <span class="amt">$149,725</span>
+          </div>
+          <p class="desc">DECOMMISSION WELLS PER ADWR AND SEPTIC TANKS PER ADEQ REGULATIONS.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 21, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA SOUTHWEST 7</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_127EAX27P0002_12C2_-NONE-_-NONE-">127EAX27P0002 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">12</span>
+            <h3>WAYWARD TRAILS LLC</h3>
+            <span class="amt">$126,000</span>
+          </div>
+          <p class="desc">CNF TRAIL BRUSHING SERVICES</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 2, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA NORTHWEST 4</dd></div>
+            <div><dt>Type</dt><dd>Definitive contract</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240BF27C0001_12C2_-NONE-_-NONE-">1240BF27C0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">13</span>
+            <h3>ASR INTERNATIONAL CORP.</h3>
+            <span class="amt">$95,763</span>
+          </div>
+          <p class="desc">THIS SERVICE CONTRACT IS FOR AN ELECTRONICS ENGINEER TECHNICIAN WHO WILL PLAY A VITAL ROLE IN ADVANCING NATIONAL WILDFIRE RESPONSE CAPABILITIES.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 15, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA NORTHWEST 3</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240BE27F0006_12C2_47QRCA25DSB17_4732">1240BE27F0006 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">14</span>
+            <h3>RTH MECHANICAL CONTRACTORS INC</h3>
+            <span class="amt">$73,950</span>
+          </div>
+          <p class="desc">WMF FHQ PROPANE BOILER REPLACEMENT</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 26, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 13</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12445527P0002_12C2_-NONE-_-NONE-">12445527P0002 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">15</span>
+            <h3>TRONAIR, INC.</h3>
+            <span class="amt">$67,609</span>
+          </div>
+          <p class="desc">PURCHASE OF TRONAIR TOWBARLESS AIRCRAFT TUG</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 20, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · INCIDENT PROCUREMENT AVIATION BRANCH</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1202SA27P0004_12C2_-NONE-_-NONE-">1202SA27P0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">16</span>
+            <h3>NINJA DE-ICER, LLC</h3>
+            <span class="amt">$64,690</span>
+          </div>
+          <p class="desc">500 TONS OF BULK SODIUM CHLORIDE FOR SNOW REMOVAL AND DE-ICING OPERATIONS ON BARC ROADS</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 9, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27F0041_1205_47QSWA23D005J_4732">124PSA27F0041 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">17</span>
+            <h3>PHOTIKON CORP</h3>
+            <span class="amt">$61,664</span>
+          </div>
+          <p class="desc">NFES 2501 ENERGIZER LANTERNS, QTY 3200 (EA) TO INCLUDE SHIPPING. 827-WRESAL35 ENERGIZER LANTERNS SHIPPED TO:  NORTHERN ROCKIES FIRE CACHE 5765 W. BROADWAY ST. BLDG F MISSOULA, MT 59808 CACHE POC/IPP APPROVER:  CAMERON STEURER  CAMERON.ST</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 5, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, INCIDENT PROCUREMENT LOGISTICS</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1202SC27K2704_12C2_GS02F0115V_4730">1202SC27K2704 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">18</span>
+            <h3>KENALL-HALFF JV, LLC</h3>
+            <span class="amt">$59,352</span>
+          </div>
+          <p class="desc">A&amp;E GEOTECHNICAL BORING</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 3, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA INTERMOUNTAIN 8</dd></div>
+            <div><dt>Type</dt><dd>Delivery order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240LT27F0005_12C2_140F0822D0258_1448">1240LT27F0005 on USAspending.gov</a></dd></div>
+          </dl>
+          <p class="flag">Joint venture. A spot check found USDA contracts in the prior five years to other entities with “Kenall” in their names, including Kenall Inc. and two other Kenall joint ventures.</p>
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">19</span>
+            <h3>SUPERIOR STORAGE TANKS &amp; TRAILERS CORPORATION</h3>
+            <span class="amt">$48,143</span>
+          </div>
+          <p class="desc">PURCHASE DIESEL FUEL TANK TRAILER</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 2, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 2</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12444027P0004_12C2_-NONE-_-NONE-">12444027P0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">20</span>
+            <h3>ROYCE INDUSTRIES LC</h3>
+            <span class="amt">$45,988</span>
+          </div>
+          <p class="desc">0412 PAYETTE WEED WASH STATION TRAILER (REPLACING FY26 REQ# 1169429) PURCHASE OF A WEED WASHING STATION TRAILER TO PREVENT INTRODUCTION AND SPREAD OF INVASIVE SPECIES.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 27, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA INTERMOUNTAIN 7</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240LS27P0001_12C2_-NONE-_-NONE-">1240LS27P0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">21</span>
+            <h3>SUMMERS SERVICES, LLC</h3>
+            <span class="amt">$36,200</span>
+          </div>
+          <p class="desc">UAC SUMMERS SERVICES LLC - DEER PROCESSING</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 22, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Office of the Chief Financial Officer · OCP SERVICE AND SUPPLY DIV</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_124PSA27P0002_1205_-NONE-_-NONE-">124PSA27P0002 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">22</span>
+            <h3>PHOENIX SOFTWARE INTERNATIONAL, INC.</h3>
+            <span class="amt">$31,945</span>
+          </div>
+          <p class="desc">ENTRYPOINT SOFTWARE LICENSE AND MAINTENANCE POP 11/5/26-11/4/31 TPOC: TODD BALLARD TODD.BALLARD@USDA.GOV UPDATES: ERIKA SHERRELL ERIKA.SHERRELL@USDA.GOV</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 5, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Agricultural Research Service · USDA ARS AFM APD</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1232SA27P0005_12H2_-NONE-_-NONE-">1232SA27P0005 on USAspending.gov</a></dd></div>
+          </dl>
+          <p class="flag">Probably not new: a company with this same name but a different registration ID (KT3UHLT7J9J4) got USDA contracts in the prior five years. <a href="https://www.usaspending.gov/award/CONT_AWD_1232SA24P0007_12H2_-NONE-_-NONE-">Example</a>.</p>
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">23</span>
+            <h3>US FOODS INC</h3>
+            <span class="amt">$27,045</span>
+          </div>
+          <p class="desc">THIS ACTION IS A RATIFICATION OF AN UNAUTHORIZED COMMITMENT</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 14, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA FOREST SERVICE</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1282A727P0001_12C2_-NONE-_-NONE-">1282A727P0001 on USAspending.gov</a></dd></div>
+          </dl>
+          <p class="flag">Probably not new: a company with this same name but a different registration ID (HZYTJENLLM81, SGJJAR598G87) got USDA contracts in the prior five years. <a href="https://www.usaspending.gov/award/CONT_AWD_1202RZ26K6342_12C2_-NONE-_-NONE-">Example</a>.</p>
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">24</span>
+            <h3>PRECISION SOLUTIONS LLC</h3>
+            <span class="amt">$25,600</span>
+          </div>
+          <p class="desc">THIS A CONTRACT ACTION TO REPLACE THE EXISTING MOTORIZED GATE AT THE SANDIA DISTRICT OFFICE FENCED PARKING AREA. THE EXISTING GATE FREQUENTLY GOES DOWN AND NEEDS REPAIRS OFTEN. THE PARKING AREA ALSO HOUSES THE SANDIA FIRE CREWS EQUIPMENT AND VEHICLES</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 2, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA SOUTHWEST 7</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_127EAX27P0004_12C2_-NONE-_-NONE-">127EAX27P0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">25</span>
+            <h3>SIMA LLC</h3>
+            <span class="amt">$20,200</span>
+          </div>
+          <p class="desc">EYNF  HVAC CONTROLLERS SERVICE &amp; MAINTENANCE - EL PORTAL &amp; CATALINA</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 5, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA NORTHWEST 3</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240BE27P0002_12C2_-NONE-_-NONE-">1240BE27P0002 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">26</span>
+            <h3>GOLDSTEIN FINANCIAL LLC</h3>
+            <span class="amt">$19,065</span>
+          </div>
+          <p class="desc">NWS MOORE AIR BASE IN MCALLEN, TX OCTOBER JOB FAIR</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 13, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Animal and Plant Health Inspection Service · MRPBS MINNEAPOLIS MN</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12639527P0001_12K3_-NONE-_-NONE-">12639527P0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">27</span>
+            <h3>SEPTIC SERVICES LLC</h3>
+            <span class="amt">$19,000</span>
+          </div>
+          <p class="desc">KAIBAB NATIONAL FOREST TUSAYAN RANGER DISTRICT VAULT TOILET PUMPING</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 16, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA SOUTHWEST 4</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_127EAU27P0001_12C2_-NONE-_-NONE-">127EAU27P0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">28</span>
+            <h3>PEREIRA SALES COMPANY, INC.</h3>
+            <span class="amt">$15,783</span>
+          </div>
+          <p class="desc">WO, LAW ENFORCEMENT REGION 13 SUBREGION 4 - SNOWMOBILE</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 2, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 7</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12444627P0006_12C2_-NONE-_-NONE-">12444627P0006 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">29</span>
+            <h3>MERICAPRO LLC</h3>
+            <span class="amt">$15,523</span>
+          </div>
+          <p class="desc">THE PURPOSE OF THIS CONTRACT IS FOR THE FOREST SERVICE TO SECURE OPERATOR IN RESPONSIBLE CHARGE (ORC) SERVICES TO MANAGE AND MAINTAIN THE WATER SYSTEM (WS) AT SHADOW MOUNTAIN VILLAGE (SMV), ON THE SULFUR RANGER DISTRICT (SRD), OF THE ARAPAHO AND ROOS</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 28, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA INTERMOUNTAIN 4</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1240LP27P0004_12C2_-NONE-_-NONE-">1240LP27P0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">30</span>
+            <h3>SP OF MADISON, INC</h3>
+            <span class="amt">$10,310</span>
+          </div>
+          <p class="desc">REMOVAL AND REMEDIATION OF WATER-DAMAGED WALLS AND CEILING MATERIALS IN HUMIDITY ROOMS 6 AND 7, BUILDING 01, FOREST PRODUCTS LABORATORY.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 23, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 6</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12444527P0004_12C2_-NONE-_-NONE-">12444527P0004 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">31</span>
+            <h3>CHELTON AVIONICS, INC</h3>
+            <span class="amt">$10,306</span>
+          </div>
+          <p class="desc">SENDING A CURRENT UNIT IN FOR MODIFICATION/CONVERSION FOR KODIAK AIRCRAFT N160Z</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 19, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · INCIDENT PROCUREMENT AVIATION BRANCH</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_1202SA27P0003_12C2_-NONE-_-NONE-">1202SA27P0003 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">32</span>
+            <h3>CENTRALSQUARE TECHNOLOGIES, LLC</h3>
+            <span class="amt">$9,600</span>
+          </div>
+          <p class="desc">FIRSTTWO BY CENTRAL SQUARE ANNUAL LAW ENFORCEMENT INVESTIGATION SOFTWARE SUBSCRIPTION PAID VIA PURCHASE CARD.</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Nov. 5, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 2</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12444027P0005_12C2_-NONE-_-NONE-">12444027P0005 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        <li class="award">
+          <div class="award-head">
+            <span class="rank">33</span>
+            <h3>NEAR1 MULTISERVICE LLC</h3>
+            <span class="amt">$6,000</span>
+          </div>
+          <p class="desc">FOREST PRODUCTS LABORATORY 2026 WET SPRINKLER FIRE SUPPRESSION INSPECTIONS TO BE PERFORMED ON THE FOREST PRODUCTS LABORATORY, LOCATED IN WISCONSIN</p>
+          <dl>
+            <div><dt>Awarded</dt><dd>Oct. 30, 2026</dd></div>
+            <div><dt>USDA agency</dt><dd>Forest Service · USDA-FS, CSA EAST 6</dd></div>
+            <div><dt>Type</dt><dd>Purchase order</dd></div>
+            <div><dt>Contract</dt><dd><a href="https://www.usaspending.gov/award/CONT_AWD_12444527P0001_12C2_-NONE-_-NONE-">12444527P0001 on USAspending.gov</a></dd></div>
+          </dl>
+          
+        </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      Data from the USAspending.gov API (api.usaspending.gov), pulled Nov. 12, 2026, at 19:24 UTC. This page is a snapshot and does not update on its own.
+    </footer>
+  </div>
+</body>
+</html>
